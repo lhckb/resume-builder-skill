@@ -27,6 +27,7 @@ This skill creates professional, high-standard resumes following Harvard Career 
 | "Review my resume" | Audit against checklist → provide specific feedback with examples |
 | "Create multiple versions" | Build base resume → create variants (1-page, 2-page, language versions) |
 | "Make it ATS-friendly" | Check format compliance → ensure parseable structure → add relevant keywords naturally |
+| "Tailor my existing resume (any format) to this job" | Extract content from baseline file (read-only) → map JD keywords to experience → write a NEW tailored docx named `<Company>_<Role>` → convert to PDF |
 
 ---
 
@@ -36,7 +37,7 @@ This skill creates professional, high-standard resumes following Harvard Career 
 
 Before writing anything, collect:
 
-1. **Full work history** — titles, companies, locations, dates, AND the domain/industry context of what each company does and what systems the user built
+1. **Full work history** — titles, companies, locations, dates, AND the domain/industry context of what each company does and what systems the user built. **If the user provides an existing resume file as a baseline (LaTeX `.tex`, Word, PDF, etc.), extract this information directly from it** instead of asking the user to retype everything. Treat the baseline file as read-only source material — never open or edit it in place.
 2. **Technical skills** — languages, frameworks, databases, tools, cloud, architecture patterns
 3. **Education** — degrees, institutions, dates
 4. **Projects** — personal, academic, open source
@@ -81,7 +82,16 @@ Or condensed: **Action Verb + What You Did + Technical Context + Business Impact
 
 ### Step 4: Format and Deliver
 
-Read `references/format-and-structure.md` for the complete guide. Use the `docx` skill to create the Word document. Key specs:
+Read `references/format-and-structure.md` for the complete guide. Use the `docx` skill to create the Word document. **Always generate a new docx file — never open or edit the baseline file (whatever its original format) or a previously delivered tailored resume in place.** Each tailoring run produces its own new output.
+
+**Naming and organization:** When tailoring to a specific job, write the new file pair into a dedicated applications directory, named by company and role:
+```
+Resume_<Company>_<Role>.docx
+Resume_<Company>_<Role>.pdf
+```
+This keeps a clean, trackable history of every version sent to every employer, with the baseline resume untouched.
+
+Key specs:
 
 - **Font:** Calibri 10.5pt body, 16pt name, 11.5pt section headings
 - **Margins:** 0.75 inches all sides
